@@ -1,4 +1,4 @@
-package ZL2;
+package zl2;
 
 import java.util.Scanner;
 
