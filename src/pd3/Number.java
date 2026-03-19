@@ -1,4 +1,4 @@
-
+//ctrl+alt+l
 package pd3;
 
 import static java.lang.Math.abs;
@@ -11,43 +11,44 @@ public class Number {
 
     public Number(int number) {
         this.number = number;
-        this.size = setSize();
-        this.type = setType();
-        this.divisibility = setDivisibility();
+        this.size = resolveSize();
+        this.type = resolveType();
+        this.divisibility = resolveDivisibility();
     }
 
-    private Size setSize() {
+    private Size resolveSize() {
         int absoluteNumber = abs(number);
-        if(absoluteNumber > 0 && absoluteNumber < 11) {
+        if (absoluteNumber < 11) {
             return Size.SMALL;
-        } else if(absoluteNumber >= 11 && absoluteNumber < 101) {
+        } else if (absoluteNumber < 101) {
             return Size.MEDIUM;
         } else {
             return Size.LARGE;
         }
     }
 
-    private Type setType() {
-        if(number < 0) {
+    private Type resolveType() {
+        if (number < 0) {
             return Type.NEGATIVE;
         } else {
             return Type.POSITIVE;
         }
     }
 
-    private String setDivisibility() {
-        if(number % 2 == 0 && number % 3 == 0 ) {
+    private String resolveDivisibility() {
+        if (number % 6 == 0) {
             return "divisible by 2 and 3";
-        } else if(number % 2 == 0) {
+        } else if (number % 2 == 0) {
             return "divisible by 2";
-        } else if(number % 3 == 0) {
+        } else if (number % 3 == 0) {
             return "divisible by 3";
-        } else{
+        } else {
             return "not divisible by 2 or 3";
         }
     }
 
-    public String getInformation(){
+    @Override
+    public String toString() {
         return String.format("Number: %d, Type: %s, Divisibility: %s, Size: %s", number, type.getDesc(), divisibility, size.getDesc());
     }
 

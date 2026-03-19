@@ -5,13 +5,16 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int number = 0;
+        int numberFromUser;
         do {
-            System.out.println("Podaj numer inny od 0");
-            number = scanner.nextInt();
-        } while (number == 0);
-        scanner.nextLine();
-        Number number1 = new Number(number);
-        System.out.println(number1.getInformation());
+            System.out.println("Podaj numer");
+            numberFromUser = scanner.nextInt();
+            if (numberFromUser == 0) {
+                System.out.println("Numer nie może być równy 0");
+            }
+        } while (numberFromUser == 0);
+
+        Number analyzedNumber = new Number(numberFromUser);
+        System.out.println(analyzedNumber);
     }
 }
