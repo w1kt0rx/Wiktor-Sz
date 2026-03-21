@@ -30,8 +30,12 @@ public class Main {
 
 
     public static void main(String[] args) {
-        System.out.println("Podaj liczbę graczy");
-        int amountOfPlayers = scanner.nextInt();
+        int amountOfPlayers;
+        do {
+            System.out.println("Podaj liczbę graczy z zakresu 2 - 10");
+            amountOfPlayers = scanner.nextInt();
+        } while (amountOfPlayers < 2 || amountOfPlayers > 10);
+
         scanner.nextLine();
         Player[] players = new Player[amountOfPlayers];
         for (int i = 0; i < amountOfPlayers; i++) {

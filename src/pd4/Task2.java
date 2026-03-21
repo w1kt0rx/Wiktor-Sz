@@ -9,7 +9,7 @@ public class Task2 {
         }
 
 
-        printPiramid();
+        printPyramid();
     }
 
     private static boolean isPrime(int number) {
@@ -23,15 +23,23 @@ public class Task2 {
         }
         return true;
     }
-    private static void printPiramid(){
+
+    private static void printPyramid() {
+        int amountOfSpaces = 5;
         for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < amountOfSpaces; j++) {
+                System.out.print(" ");
+            }
             if (i == 0) {
                 System.out.println("*");
-            } else if (i == 1) {
-                System.out.println(" ");
+            } else if (i == 1){
+                System.out.println("");
             } else {
-                System.out.println("**");
+                System.out.print("*");
+                System.out.println("*");
             }
+            amountOfSpaces--;
         }
+
     }
 }
