@@ -26,18 +26,16 @@ public class Task2 {
 
     private static void printPyramid() {
         int amountOfSpaces = 5;
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < amountOfSpaces; j++) {
+        int amountOfStars = 1;
+        while(amountOfSpaces > 0) {
+            for (int i = 0; i < amountOfSpaces; i++) {
                 System.out.print(" ");
             }
-            if (i == 0) {
-                System.out.println("*");
-            } else if (i == 1){
-                System.out.println("");
-            } else {
+            for (int i = 0; i < amountOfStars; i++) {
                 System.out.print("*");
-                System.out.println("*");
             }
+            System.out.println();
+            amountOfStars+=2;
             amountOfSpaces--;
         }
 

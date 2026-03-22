@@ -14,8 +14,8 @@ public class Player implements Comparable<Player> {
 
 
     public int getScoreSum() {
-        int scoreSum = scores[0];
-        for (int i = 1; i < scores.length; i++) {
+        int scoreSum = 0;
+        for (int i = 0; i < scores.length; i++) {
             scoreSum += scores[i];
         }
         return scoreSum;

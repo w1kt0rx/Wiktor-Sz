@@ -45,15 +45,17 @@ public class Main {
 
         }
         Arrays.sort(players);
-        for (int i = 0; i < players.length; i++) {
+        for (int i = 0; i < amountOfPlayers; i++) {
             if (i == getIndexOfMaxScore(players)) {
-                System.out.printf("%d.%s*%n", i + 1, players[i]);
+                System.out.printf("%d.%s*, average score: %f, largest score: %d, score sum: %d, smallest score: %d %n", i + 1, players[i],
+                        players[i].getAverageScore(), players[i].getLargestScore(), players[i].getScoreSum(),  players[i].getSmallestScore());
             } else {
-                System.out.printf("%d.%s%n", i + 1, players[i]);
+                System.out.printf("%d.%s, average score: %f, largest score: %d, score sum: %d, smallest score: %d %n", i + 1, players[i],
+                        players[i].getAverageScore(), players[i].getLargestScore(), players[i].getScoreSum(),  players[i].getSmallestScore());
             }
         }
 
-        for (int i = 0; i < players.length; i++) {
+        for (int i = 0; i < amountOfPlayers; i++) {
             System.out.printf("%d miejsce %s%n", i + 1, players[i].getName());
         }
         scanner.close();
