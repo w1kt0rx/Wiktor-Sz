@@ -11,6 +11,7 @@ public class PolymorphTest {
         productList.add(Electronics.of("Samsung", 153.33, "Lodówka", 24));
         productList.add(FoodProduct.of("Salami", 10.00, "Mięso", 3));
         productList.add(FoodProduct.of("Ser gołda", 5.00, "Nabiał", 2));
+
         for (Product product : productList) {
             System.out.print(product.getDescription());
         }
