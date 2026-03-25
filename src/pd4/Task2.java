@@ -27,7 +27,7 @@ public class Task2 {
     private static void printPyramid() {
         int amountOfSpaces = 5;
         int amountOfStars = 1;
-        while(amountOfSpaces > 0) {
+        while (amountOfSpaces > 0) {
             for (int i = 0; i < amountOfSpaces; i++) {
                 System.out.print(" ");
             }
@@ -35,7 +35,7 @@ public class Task2 {
                 System.out.print("*");
             }
             System.out.println();
-            amountOfStars+=2;
+            amountOfStars += 2;
             amountOfSpaces--;
         }
 

@@ -21,12 +21,12 @@ public class Player implements Comparable<Player> {
         return scoreSum;
     }
 
-    public double getAverageScore(){
+    public double getAverageScore() {
         return getScoreSum() / 3.0;
     }
 
-    public int getSmallestScore(){
-        int  smallestScore = scores[0];
+    public int getSmallestScore() {
+        int smallestScore = scores[0];
         for (int i = 1; i < scores.length; i++) {
             if (scores[i] < smallestScore) {
                 smallestScore = scores[i];
@@ -34,7 +34,8 @@ public class Player implements Comparable<Player> {
         }
         return smallestScore;
     }
-    public int getLargestScore(){
+
+    public int getLargestScore() {
         int largestScore = scores[0];
         for (int i = 1; i < scores.length; i++) {
             if (scores[i] > largestScore) {
@@ -52,10 +53,13 @@ public class Player implements Comparable<Player> {
     public String toString() {
         return name;
     }
+
     public int compareTo(Player other) {
         return -(this.getScoreSum() - other.getScoreSum());
     }
 
-
-
+    public String getInformationWithStatistics() {
+        return String.format("%s, average score: %f, largest score: %d, score sum: %d, smallest score: %d", name,
+                getAverageScore(), getLargestScore(), getScoreSum(), getSmallestScore());
+    }
 }

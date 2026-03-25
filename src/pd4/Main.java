@@ -47,11 +47,9 @@ public class Main {
         Arrays.sort(players);
         for (int i = 0; i < amountOfPlayers; i++) {
             if (i == getIndexOfMaxScore(players)) {
-                System.out.printf("%d.%s*, average score: %f, largest score: %d, score sum: %d, smallest score: %d %n", i + 1, players[i],
-                        players[i].getAverageScore(), players[i].getLargestScore(), players[i].getScoreSum(),  players[i].getSmallestScore());
+                System.out.println(i + 1 + ".*" + players[i].getInformationWithStatistics());
             } else {
-                System.out.printf("%d.%s, average score: %f, largest score: %d, score sum: %d, smallest score: %d %n", i + 1, players[i],
-                        players[i].getAverageScore(), players[i].getLargestScore(), players[i].getScoreSum(),  players[i].getSmallestScore());
+                System.out.println(i + 1 + ". " + players[i].getInformationWithStatistics());
             }
         }
 
