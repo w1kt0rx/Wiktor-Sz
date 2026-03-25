@@ -4,15 +4,12 @@ import java.util.Scanner;
 
 public class MathLibrary {
     static Scanner scanner = new Scanner(System.in);
-
     /**
      * Method calculates the factorial of a number using iteration
      *
      * @param n - number that will be factorialized
      * @return result of calculating factorial
-     *
      */
-
     private static long factorialIteration(final int n) {
         if (n == 0) {
             return 1;
@@ -30,24 +27,19 @@ public class MathLibrary {
      *
      * @param n - number that will be factorialized
      * @return result of calculating factorial
-     *
      */
-
     private static long factorialRecursion(int n) {
         if (n == 0 || n == 1) {
             return 1;
         }
         return n * factorialRecursion(n - 1);
     }
-
     /**
      * Method checks if number given by the user is a prime number
      *
      * @param n - number that is supposed to be checked
-     * @return true or false, depending on number
-     *
+     * @return true or false
      */
-
     private static boolean isPrime(int n) {
         double sqrtOfNumber = Math.sqrt(n);
         for (int i = 2; i <= sqrtOfNumber; i++) {
@@ -57,13 +49,11 @@ public class MathLibrary {
         }
         return true;
     }
-
     /**
      * Method calculates sieveOfEratosthenes with limit set by the user
      *
      * @param limit boundary of sieve
-     * @return array that build of numbers in sieveOfEratosthenes
-     *
+     * @return array that is build of numbers in sieveOfEratosthenes
      */
     private static int[] sieveOfEratosthenes(int limit) {
         int[] tabOfNumbers = new int[limit - 2];
@@ -99,7 +89,6 @@ public class MathLibrary {
      *
      * @param a,b - numbers from which method finds gcd
      * @return gcd found using Euclides algorithm
-     *
      */
     private static int gcd(int a, int b) {
         if (a % b == 0) {
@@ -110,22 +99,19 @@ public class MathLibrary {
 
     /**
      * Method that controls menu
-     *
-     *
-     *
-     *
      */
-
     static void menu() {
         boolean isFinished = false;
         System.out.println("Witam w interaktywnym menu");
         while (!isFinished) {
-            System.out.println("1.Iteracyjna silnia");
-            System.out.println("2.Rekurencyjna silnia");
-            System.out.println("3.Sprawdzenie czy liczba jest liczbą pierwszą");
-            System.out.println("4.Utworzenie sita Eratostenesa");
-            System.out.println("5.Obliczenie największego wspólnego dzielnika.");
-            System.out.println("6.Wyjście");
+            System.out.println("""
+                    1.Iteracyjna silnia
+                    2.Rekurencyjna silnia
+                    3.Sprawdzenie czy liczba jest liczbą pierwszą
+                    4.Utworzenie sita Eratostenesa
+                    5.Obliczenie największego wspólnego dzielnika
+                    6.Wyjście
+                    """);
             System.out.println("Prosze podać liczbę odpowiadającą funkcji którą chcesz wybrać ");
             int choice = scanner.nextInt();
             scanner.nextLine();
@@ -150,12 +136,7 @@ public class MathLibrary {
 
     /**
      * Method print the result from method factorialIteration
-     *
-     *
-     *
-     *
      */
-
     private static void factorialIterationMenu() {
         System.out.println("Prosze podac liczbę z której mamy obliczyć silnie");
         int number = scanner.nextInt();
@@ -165,9 +146,7 @@ public class MathLibrary {
 
     /**
      * Method print the result from method factorialRecursion
-     *
      */
-
     private static void factorialRecursionMenu() {
         System.out.println("Prosze podac liczbę z której mamy obliczyć silnie");
         int number = scanner.nextInt();
@@ -177,7 +156,6 @@ public class MathLibrary {
 
     /**
      * Method print the result from method isPrime
-     *
      */
 
     private static void isPrimeMenu() {
@@ -189,9 +167,7 @@ public class MathLibrary {
 
     /**
      * Method print the result from method sieveOfEratosthenes
-     *
      */
-
     private static void sieveOfEratosthenesMenu() {
         System.out.println("Prosze podac liczbę która będzie granicą sita Eratostenesa");
         int number = scanner.nextInt();
@@ -206,10 +182,7 @@ public class MathLibrary {
 
     /**
      * Method print the result from method gcd
-     *
      */
-
-
     private static void gcdMenu() {
         System.out.println("Prosze podac dwie liczby do obliczenia NWD");
         int number = scanner.nextInt();
