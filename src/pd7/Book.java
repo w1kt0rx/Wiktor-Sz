@@ -2,20 +2,22 @@ package pd7;
 
 import lombok.ToString;
 
-public final class Book extends RentableResource {
-    private int amountOfPages;
+import java.math.BigDecimal;
 
-    public Book(String name, int basePrice, int amountOfPages) {
+public final class Book extends RentableResource {
+    private final int amountOfPages;
+
+    public Book(String name, BigDecimal basePrice, int amountOfPages) {
         super(ResourceType.BOOK, basePrice, name);
         this.amountOfPages = amountOfPages;
     }
 
-    public static Book of(String name, int basePrice, int amountOfPages) {
+    public static Book of(String name, BigDecimal basePrice, int amountOfPages) {
         return new Book(name, basePrice, amountOfPages);
     }
 
     @Override
-    public double calculatePrice() {
-        return getBasePrice() * 1.56;
+    public BigDecimal calculatePrice() {
+        return getBasePrice().multiply(BigDecimal.valueOf(1.56));
     }
 }

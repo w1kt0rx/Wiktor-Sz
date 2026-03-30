@@ -1,5 +1,6 @@
 package pd7;
 
+import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -33,14 +34,14 @@ public class Main {
      * @param system
      */
     private static void createResourcesAndFill(RentalSystem system) {
-        RentableResource book1 = Book.of("Lalka", 22, 300);
-        RentableResource book2 = Book.of("W pustyni i w puszczy", 12, 400);
-        RentableResource game1 = BoardGame.of("Monopoly", 20, 4, 30);
-        RentableResource game2 = BoardGame.of("The Floor", 25, 2, 20);
+        RentableResource book1 = Book.of("Lalka", BigDecimal.valueOf(22), 300);
+        RentableResource book2 = Book.of("W pustyni i w puszczy", BigDecimal.valueOf(12), 400);
+        RentableResource game1 = BoardGame.of("Monopoly", BigDecimal.valueOf(20), 4, 30);
+        RentableResource game2 = BoardGame.of("The Floor", BigDecimal.valueOf(25), 2, 20);
 
         system.addRental(Rental.of(book1, 20, RentalStatus.ACTIVE));
         system.addRental(Rental.of(book2, 35, RentalStatus.ACTIVE));
-        system.addRental(Rental.of(game1, 5, RentalStatus.FINISHED));
+        system.addRental(Rental.of(game1, 5, RentalStatus.ACTIVE));
         system.addRental(Rental.of(game2, 10, RentalStatus.ACTIVE));
     }
 }

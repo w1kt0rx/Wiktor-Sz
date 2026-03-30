@@ -1,20 +1,21 @@
 package pd7;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
+
+import java.math.BigDecimal;
 
 @ToString
 @Getter
 public abstract sealed class RentableResource implements Comparable<RentableResource> permits Book, BoardGame {
     private static int amountOfResources = 0;
-    private final int ID;
-    private String name;
-    private int basePrice;
+    private final int id;
+    private final String name;
+    private final BigDecimal basePrice;
     private final ResourceType resourceType;
 
-    public RentableResource(ResourceType resourceType, int basePrice, String name) {
-        this.ID = ++amountOfResources;
+    public RentableResource(ResourceType resourceType, BigDecimal basePrice, String name) {
+        this.id = ++amountOfResources;
         this.resourceType = resourceType;
         this.basePrice = basePrice;
         this.name = name;
@@ -22,11 +23,9 @@ public abstract sealed class RentableResource implements Comparable<RentableReso
 
     @Override
     public int compareTo(RentableResource o) {
-        return Double.compare(this.basePrice, o.basePrice);
+        return this.basePrice.compareTo(o.basePrice);
     }
 
-    public abstract double calculatePrice();
-
-
+    public abstract BigDecimal calculatePrice();
 }
 

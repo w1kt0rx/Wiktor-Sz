@@ -1,5 +1,6 @@
 package pd7;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,10 +15,10 @@ public class RentalSystem {
      *
      * @return total cost off all resources in rentalList
      */
-    public double getTotalCost() {
-        double totalCost = 0;
+    public BigDecimal getTotalCost() {
+        BigDecimal totalCost = BigDecimal.ZERO;
         for (var rental : rentalList) {
-            totalCost += rental.calculateTotalCost();
+            totalCost = totalCost.add(rental.calculateTotalCost());
         }
         return totalCost;
     }
