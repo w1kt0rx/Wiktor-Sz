@@ -34,10 +34,10 @@ public class Main {
      * @param system
      */
     private static void createResourcesAndFill(RentalSystem system) {
-        RentableResource book1 = Book.of("Lalka", BigDecimal.valueOf(22), 300);
-        RentableResource book2 = Book.of("W pustyni i w puszczy", BigDecimal.valueOf(12), 400);
-        RentableResource game1 = BoardGame.of("Monopoly", BigDecimal.valueOf(20), 4, 30);
-        RentableResource game2 = BoardGame.of("The Floor", BigDecimal.valueOf(25), 2, 20);
+        RentableResource book1 = Book.of("Lalka", new BigDecimal("22"), 300);
+        RentableResource book2 = Book.of("W pustyni i w puszczy", new BigDecimal("12"), 400);
+        RentableResource game1 = BoardGame.of("Monopoly", new BigDecimal("20"), 4, 30);
+        RentableResource game2 = BoardGame.of("The Floor", new BigDecimal("25"), 2, 20);
 
         system.addRental(Rental.of(book1, 20, RentalStatus.ACTIVE));
         system.addRental(Rental.of(book2, 35, RentalStatus.ACTIVE));

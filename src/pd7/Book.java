@@ -18,6 +18,6 @@ public final class Book extends RentableResource {
 
     @Override
     public BigDecimal calculatePrice() {
-        return getBasePrice().multiply(BigDecimal.valueOf(1.56));
+        return getBasePrice().multiply(new BigDecimal("1.56"));
     }
 }

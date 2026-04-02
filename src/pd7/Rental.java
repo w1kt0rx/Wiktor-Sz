@@ -13,7 +13,7 @@ public record Rental(RentableResource resource, int days, RentalStatus rentalSta
      * @return calculating cost of rent with duration of rental
      */
     public BigDecimal calculateTotalCost() {
-        return resource.calculatePrice().multiply(BigDecimal.valueOf(days));
+        return resource.calculatePrice().multiply(new BigDecimal(Integer.toString(days)));
     }
 }
 

@@ -20,6 +20,6 @@ public final class BoardGame extends RentableResource {
 
     @Override
     public BigDecimal calculatePrice() {
-        return getBasePrice().multiply(BigDecimal.valueOf(1.89));
+        return getBasePrice().multiply(new BigDecimal("1.89"));
     }
 }
