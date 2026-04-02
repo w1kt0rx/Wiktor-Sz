@@ -15,9 +15,12 @@ public class NumberStats<T extends Number & Comparable<T>> {
     private Double average;
     private List<T> sorted;
 
-
     public void add(T number) {
         listOfNumbers.add(number);
+        clearCache();
+    }
+
+    private void clearCache() {
         max = null;
         min = null;
         sum = null;
@@ -54,7 +57,7 @@ public class NumberStats<T extends Number & Comparable<T>> {
             if (listOfNumbers.isEmpty()) {
                 return 0.0;
             }
-            return getSum() / listOfNumbers.size();
+            return getSum() / getCount();
         }
         return average;
     }
@@ -74,5 +77,5 @@ public class NumberStats<T extends Number & Comparable<T>> {
     @Override
     public String toString() {
         return listOfNumbers.toString();
-     }
+    }
 }
