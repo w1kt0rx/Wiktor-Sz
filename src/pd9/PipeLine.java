@@ -13,9 +13,9 @@ public class PipeLine {
 
     public static void main(String[] args) {
 
-        List<String> listOfString = List.of("Wielkie Jabłko", "Banan bez ogonka", "Mango jakieś");
+        List<String> listOfString = List.of("   Wielkie Jabłko", "Banan bez ogonka   ", " Mango jakieś");
 
-        Transformer<String> removeSpaces = input -> input.replace(" ", "");
+        Transformer<String> removeSpaces = String::trim;
 
         Transformer<String> toUpper = String::toUpperCase;
 
