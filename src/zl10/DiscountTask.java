@@ -49,17 +49,17 @@ public class DiscountTask {
 
     private static Optional<String> determineSubscriptionDiscount(User user) {
         return Optional.ofNullable(user)
-                .map(User::getSubscription)
+                .flatMap(User::getSubscription)
                 .filter(Subscription::isActive)
-                .map(Subscription::getDiscountCode)
+                .flatMap(Subscription::getDiscountCode)
                 .flatMap(DiscountTask::normalizeCode);
     }
 
     private static Optional<String> determineReferralDiscount(User user) {
         return Optional.ofNullable(user)
-                .map(User::getReferralProgram)
+                .flatMap(User::getReferralProgram)
                 .filter(ReferralProgram::isEnabled)
-                .map(ReferralProgram::getReferralCode)
+                .flatMap(ReferralProgram::getReferralCode)
                 .flatMap(DiscountTask::normalizeCode);
     }
 
@@ -88,12 +88,12 @@ public class DiscountTask {
             this.loyaltyPoints = loyaltyPoints;
         }
 
-        public Subscription getSubscription() {
-            return subscription;
+        public Optional<Subscription> getSubscription() {
+            return Optional.ofNullable(subscription);
         }
 
-        public ReferralProgram getReferralProgram() {
-            return referralProgram;
+        public Optional<ReferralProgram> getReferralProgram() {
+            return Optional.ofNullable(referralProgram);
         }
 
         public int getLoyaltyPoints() {
@@ -114,8 +114,8 @@ public class DiscountTask {
             return active;
         }
 
-        public String getDiscountCode() {
-            return discountCode;
+        public Optional<String> getDiscountCode() {
+            return Optional.ofNullable(discountCode);
         }
     }
 
@@ -132,8 +132,8 @@ public class DiscountTask {
             return enabled;
         }
 
-        public String getReferralCode() {
-            return referralCode;
+        public Optional<String> getReferralCode() {
+            return Optional.ofNullable(referralCode);
         }
     }
 }
