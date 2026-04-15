@@ -25,23 +25,8 @@ public class Main {
 
                 registrationService.getUsersRepository().printUsers();
 
-            } catch (ValidationException e) {
-                System.out.println(
-                        "Błąd walidacji '" + e.getField() + "': " + e.getMessage()
-                );
-                System.out.println("Spróbuj ponownie.");
-
-            } catch (DuplicateEmailException e) {
-                System.out.println("Email już istnieje: " + e.getEmail());
-
-            } catch (WeakPasswordException e) {
-                System.out.println(
-                        "Hasło jest za słabe. Siła: " + e.getStrength()
-                                + ", szczegóły: " + e.getDetails()
-                );
-
-            } catch (RegistrationException e) {
-                System.out.println("Błąd rejestracji: " + e.getMessage());
+            } catch (ValidationException | DuplicateEmailException| WeakPasswordException e) {
+                System.err.println(e.getMessage());
             } finally {
                 System.out.println("Czy chcesz kontynuować?\n0 - wyjdź");
                 option = scanner.nextLine();
