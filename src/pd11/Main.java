@@ -7,8 +7,8 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         UserRegistrationService registrationService = new UserRegistrationService();
-
-        while (true) {
+        String option;
+        do {
             try {
                 System.out.println("Rejestracja prosze podać dane");
 
@@ -23,8 +23,7 @@ public class Main {
 
                 registrationService.registerUser(name, email, password);
 
-                System.out.println("Rejestracja zakończona sukcesem.");
-                registrationService.printUsers();
+                registrationService.getUsersRepository().printUsers();
 
             } catch (ValidationException e) {
                 System.out.println(
@@ -43,7 +42,10 @@ public class Main {
 
             } catch (RegistrationException e) {
                 System.out.println("Błąd rejestracji: " + e.getMessage());
+            } finally {
+                System.out.println("Czy chcesz kontynuować?\n0 - wyjdź");
+                option = scanner.nextLine();
             }
-        }
+        } while (!option.equals("0"));
     }
 }
