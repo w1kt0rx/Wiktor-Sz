@@ -20,12 +20,12 @@ public class Warehouse {
 
     }
 
-    public void removeProduct(Product product) {
-        if (inventory.remove(product.getId()) == null) {
+    public void removeProductById(Long id) {
+        if (inventory.remove(id) == null) {
             return;
         }
-        productsByCategory.get(product.getCategory()).remove(product);
-        lowStockQueue.remove(product);
+        productsByCategory.get(inventory.get(id).getCategory()).remove(inventory.get(id));
+        lowStockQueue.remove(inventory.get(id));
     }
 
     public void updateQuantity(Product product, int quantity) {
