@@ -9,7 +9,7 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class EventProcessor {
+public final class EventProcessor {
 
     public static void process(
             List<Event> events,
@@ -25,9 +25,8 @@ public class EventProcessor {
                     break;
                 }
             }
-            if(passed){
-                String formatted = formatter.apply(event);
-                output.accept(formatted);
+            if( passed ){
+                output.accept(formatter.apply(event));
             }
         });
     }
