@@ -1,11 +1,15 @@
 package pd14;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-public abstract class EventProcessor {
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+public class EventProcessor {
 
     public static void process(
             List<Event> events,
