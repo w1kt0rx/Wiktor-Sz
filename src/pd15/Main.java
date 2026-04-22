@@ -1,6 +1,7 @@
 package pd15;
 
 import java.math.BigDecimal;
+import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
@@ -30,9 +31,41 @@ public class Main {
         storage.add(Product.of(18L, "Jeans", ProductCategory.CLOTHING, new BigDecimal("120"), 7, 180, 4.5));
         storage.add(Product.of(19L, "Jacket", ProductCategory.CLOTHING, new BigDecimal("250"), 3, 90, 4.6));
         storage.add(Product.of(20L, "Sneakers", ProductCategory.CLOTHING, new BigDecimal("200"), 6, 160, 4.4));
-        //ProductUtils.getTop5Products(storage.getProductList()).forEach(System.out::println);
-        //ProductUtils.getLowStock(storage.getProductList()).forEach(System.out::println);
-        ProductUtils.filterByAverageRatingAndPrice(storage.getProductList()).forEach(System.out::println);
-        System.out.println(ProductUtils.getHighestPriceProduct(storage.getProductList()));
+
+        System.out.println("Top selling:");
+        ProductUtils.findTopSellingProducts(storage.getProductList())
+                .forEach(System.out::println);
+
+        System.out.println("\nBest category:");
+        System.out.println(ProductUtils.findCategoryWithHighestAverageRating(storage.getProductList()));
+
+        System.out.println("\nLow stock:");
+        ProductUtils.findLowStockProducts(storage.getProductList())
+                .forEach(System.out::println);
+
+        System.out.println("\nCount per category:");
+        Map<ProductCategory, Long> count = ProductUtils.countProductsByCategory(storage.getProductList());
+        count.forEach((k, v) -> System.out.println(k + ": " + v));
+
+        System.out.println("\nStats per category:");
+        ProductUtils.getCategoryPriceStatistics(storage.getProductList())
+                .forEach((k, v) -> System.out.println(k + ": " + v));
+
+        System.out.println("\nHigh rated & cheap:");
+        ProductUtils.findHighRatedAffordableProducts(storage.getProductList())
+                .forEach(System.out::println);
+
+        System.out.println("\nAll ratings valid:");
+        System.out.println(ProductUtils.areAllRatingsValid(storage.getProductList()));
+
+        System.out.println("\nMost expensive:");
+        System.out.println(ProductUtils.findMostExpensiveProduct(storage.getProductList()));
+
+        System.out.println("\nPartition premium:");
+        System.out.println(ProductUtils.partitionProductsByPriceTier(storage.getProductList()));
+
+        System.out.println("\nReport:");
+        ProductUtils.generateCategoryTopProductReport(storage.getProductList())
+                .forEach(System.out::println);
     }
 }

@@ -30,7 +30,8 @@ public class Product {
         this.sold = sold;
         this.rating = rating;
     }
-    public static Product of(Long id, String name, ProductCategory category, BigDecimal price, int stock, int sold, double rating){
+
+    public static Product of(Long id, String name, ProductCategory category, BigDecimal price, int stock, int sold, double rating) {
         return new Product(id, name, category, price, stock, sold, rating);
     }
 }
