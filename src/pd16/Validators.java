@@ -39,6 +39,7 @@ public class Validators {
             throw new RuntimeException("Hasło powinno zawierać co najmniej 8 znaków, wielką literę, cyfrę oraz znak specjalny");
         }
     }
+
     public static void validateGame(String name, BigDecimal price) {
         if (name == null || name.isBlank()) throw new RuntimeException();
         if (price.compareTo(BigDecimal.ZERO) <= 0) throw new RuntimeException();

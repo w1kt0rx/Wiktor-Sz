@@ -97,7 +97,7 @@ public class App {
                     """, client.getName());
 
             switch (scanner.nextLine()) {
-                case "1" -> gameService.printAllRentalbleGames();
+                case "1" -> gameService.printAllRentableGames();
                 case "2" -> rentGameMenu(client);
                 case "3" -> returnGameMenu(client);
                 case "4" -> clientService.printAllRentals(client);
@@ -185,7 +185,7 @@ public class App {
     private void rentGameMenu(Client client) {
         System.out.println("Dostępne gry:");
         try {
-            gameService.printAllRentalbleGames();
+            gameService.printAllRentableGames();
 
             System.out.print("ID gry: ");
             long id = Long.parseLong(scanner.nextLine());

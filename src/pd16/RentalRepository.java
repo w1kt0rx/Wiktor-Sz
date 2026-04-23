@@ -16,7 +16,8 @@ public class RentalRepository {
     public boolean contain(long id) {
         return rentalMap.containsKey(id);
     }
-    public Rental get(long id ){
+
+    public Rental get(long id) {
         return rentalMap.get(id);
     }
 

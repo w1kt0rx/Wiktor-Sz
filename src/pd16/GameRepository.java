@@ -24,8 +24,8 @@ public class GameRepository {
         return gameMap.containsKey(game.getId());
     }
 
-    public Game get(long id){
-        if(gameMap.containsKey(id)) {
+    public Game get(long id) {
+        if (gameMap.containsKey(id)) {
             return gameMap.get(id);
         }
         return null;

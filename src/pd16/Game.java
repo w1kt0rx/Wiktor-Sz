@@ -1,21 +1,23 @@
 package pd16;
 
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 import java.math.BigDecimal;
 import java.util.Objects;
 
 @Getter
-public class Game{
+public class Game {
     private static long amountOfGames = 0;
     private final long id;
     private final String name;
     private final GameCategory category;
+    @Setter
     private BigDecimal rentPricePerDay;
     private Status status;
 
-    public Game(String name, GameCategory category, BigDecimal rentPrice){
+    public Game(String name, GameCategory category, BigDecimal rentPrice) {
         this.id = ++amountOfGames;
         this.name = name;
         this.category = category;
@@ -23,7 +25,7 @@ public class Game{
         this.status = Status.AVAILABLE;
     }
 
-    public boolean isAvailable(){
+    public boolean isAvailable() {
         return status == Status.AVAILABLE;
     }
 
@@ -32,16 +34,21 @@ public class Game{
         return o instanceof Game g && g.id == id;
     }
 
-    public void rent() { status = Status.RENTED; }
+    public void rent() {
+        status = Status.RENTED;
+    }
 
-    public void returnGame() { status = Status.AVAILABLE; }
+    public void returnGame() {
+        status = Status.AVAILABLE;
+    }
 
     @Override
     public int hashCode() {
         return Objects.hash(id);
     }
+
     @Override
     public String toString() {
         return id + " " + name + " " + status;
-}
+    }
 }

@@ -4,20 +4,22 @@ import java.math.BigDecimal;
 
 public class GameService {
     private final GameRepository gameRepository = new GameRepository();
-    public void printAllGames(){
+
+    public void printAllGames() {
         gameRepository.getGameMap()
                 .values()
                 .forEach(System.out::println);
     }
 
-    public void printAllRentalbleGames(){
+    public void printAllRentableGames() {
         gameRepository.getGameMap()
                 .values()
                 .stream()
                 .filter(Game::isAvailable)
                 .forEach(System.out::println);
     }
-    public Game getGameWithId(long id){
+
+    public Game getGameWithId(long id) {
         return gameRepository.get(id);
     }
 

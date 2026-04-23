@@ -1,25 +1,25 @@
 package pd16;
 
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 import java.math.BigDecimal;
+
 @Getter
 @ToString
 public class Rental {
     private static long amountOfRentals = 0;
-    private Client client;
-    private long id;
-    private Game game;
+    private final Client client;
+    private final long id;
+    private final Game game;
+    @Setter
     private int days;
+    @Setter
     private BigDecimal fullPrice;
     private RentalStatus status;
 
-    public void changeStatus(){
-        status = RentalStatus.COMPLETED;
-    }
-
-    public Rental(Client client, Game game, int days){
+    public Rental(Client client, Game game, int days) {
         this.client = client;
         this.id = ++amountOfRentals;
         this.game = game;
