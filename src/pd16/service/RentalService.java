@@ -1,4 +1,10 @@
-package pd16;
+package pd16.service;
+
+import pd16.entity.*;
+import pd16.exception.InvalidRentalStateException;
+import pd16.exception.RentalNotFoundException;
+import pd16.exception.RentalOwnershipException;
+import pd16.repository.RentalRepository;
 
 import java.math.BigDecimal;
 import java.util.Map;
@@ -10,36 +16,29 @@ public class RentalService {
     public void rentGame(Client client, Game game, int days) {
         if (game.getStatus() == Status.AVAILABLE) {
             Rental rental = new Rental(client, game, days);
-            rentalRepository.put(rental);
+            rentalRepository.save(rental);
             client.addRental(rental);
-            game.rent();
+            game.markAsRented();
         } else {
             System.out.println("Gra nie jest dostępna.");
         }
     }
 
     public void printAllRentals() {
-        rentalRepository.getRentalMap().forEach((id, rental) -> System.out.println(rental));
+        rentalRepository.getAllRentals().forEach(System.out::println);
 
     }
 
     public void returnGameById(Client client, Long id) {
-        Rental rental = rentalRepository.get(id);
+        Rental rental = rentalRepository.get(id)
+                .orElseThrow(() -> new RentalNotFoundException(id));
 
-        if (rental == null) {
-            throw new RuntimeException("Nie znaleziono wypożyczenia");
-        }
+        if (!rental.getClient().equals(client)) throw new RentalOwnershipException();
+        if (rental.getStatus() == RentalStatus.COMPLETED)
+            throw new InvalidRentalStateException();
 
-        if (!rental.getClient().equals(client)) {
-            throw new RuntimeException("To nie jest Twoje wypożyczenie");
-        }
-
-        if (rental.getStatus() == RentalStatus.COMPLETED) {
-            throw new RuntimeException("Gra już została zwrócona");
-        }
-
-        rental.complete();
-        rental.getGame().returnGame();
+        rental.markAsCompleted();
+        rental.getGame().markAsAvailable();
     }
 
     public void printReports() {
@@ -54,9 +53,9 @@ public class RentalService {
     }
 
     public void revenueByCategory() {
-        rentalRepository.getRentalMap().values().stream()
+        rentalRepository.getAllRentals().stream()
                 .collect(Collectors.groupingBy(
-                        r -> r.getGame().getCategory(),
+                        rental -> rental.getGame().getCategory(),
                         Collectors.reducing(
                                 BigDecimal.ZERO,
                                 Rental::getFullPrice,
@@ -69,20 +68,18 @@ public class RentalService {
     }
 
     public void topClient() {
-        rentalRepository.getRentalMap().values().stream()
+        rentalRepository.getAllRentals().stream()
                 .collect(Collectors.groupingBy(
                         Rental::getClient,
                         Collectors.counting()
                 ))
-                .entrySet().stream()
-                .max(Map.Entry.comparingByValue())
-                .ifPresent(e ->
-                        System.out.println("Top klient: " + e.getKey() + " -> " + e.getValue())
-                );
+                .values().stream()
+                .max(Long::compareTo)
+                .ifPresent(maxCount -> System.out.println("Max wynajęć: " + maxCount));
     }
 
     public void mostPopularGames() {
-        rentalRepository.getRentalMap().values().stream()
+        rentalRepository.getAllRentals().stream()
                 .collect(Collectors.groupingBy(
                         Rental::getGame,
                         Collectors.counting()

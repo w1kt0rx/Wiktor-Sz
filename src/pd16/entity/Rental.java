@@ -1,4 +1,4 @@
-package pd16;
+package pd16.entity;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -28,7 +28,7 @@ public class Rental {
         this.status = RentalStatus.ACTIVE;
     }
 
-    public void complete() {
+    public void markAsCompleted() {
         status = RentalStatus.COMPLETED;
     }
 }

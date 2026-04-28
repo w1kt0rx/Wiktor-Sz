@@ -1,4 +1,7 @@
-package pd16;
+package pd16.repository;
+
+import pd16.entity.Game;
+import pd16.entity.GameCategory;
 
 import java.math.BigDecimal;
 import java.util.*;
@@ -12,26 +15,23 @@ public class GameRepository {
         gameMap.put(3L, new Game("The Witcher: Old World", GameCategory.RPG, new BigDecimal("25")));
     }
 
-    public void put(Game game) {
+    public void save(Game game) {
         gameMap.put(game.getId(), game);
     }
 
-    public void remove(Game game) {
+    public void delete(Game game) {
         gameMap.remove(game.getId());
     }
 
-    public boolean contains(Game game) {
+    public boolean existsByGame(Game game) {
         return gameMap.containsKey(game.getId());
     }
 
-    public Game get(long id) {
-        if (gameMap.containsKey(id)) {
-            return gameMap.get(id);
-        }
-        return null;
+    public Optional<Game> get(long id) {
+        return Optional.ofNullable(gameMap.get(id));
     }
 
-    public Map<Long, Game> getGameMap() {
-        return Collections.unmodifiableMap(gameMap);
+    public List<Game> getAllGames() {
+        return gameMap.values().stream().toList();
     }
 }

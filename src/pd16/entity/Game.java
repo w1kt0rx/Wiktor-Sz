@@ -1,8 +1,7 @@
-package pd16;
+package pd16.entity;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 import java.math.BigDecimal;
 import java.util.Objects;
@@ -34,11 +33,11 @@ public class Game {
         return o instanceof Game g && g.id == id;
     }
 
-    public void rent() {
+    public void markAsRented() {
         status = Status.RENTED;
     }
 
-    public void returnGame() {
+    public void markAsAvailable() {
         status = Status.AVAILABLE;
     }
 

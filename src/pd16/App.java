@@ -1,7 +1,12 @@
 package pd16;
 
+import pd16.entity.Client;
+import pd16.entity.GameCategory;
+import pd16.service.ClientService;
+import pd16.service.GameService;
+import pd16.service.RentalService;
+
 import java.math.BigDecimal;
-import java.util.Optional;
 import java.util.Scanner;
 
 public class App {
@@ -65,22 +70,14 @@ public class App {
 
         System.out.println("Podaj hasło:");
         String password = scanner.nextLine();
-
-        Optional<Client> userOpt = clientService.loginUser(email, password);
-
-        if (userOpt.isEmpty()) {
-            System.out.println("Niepoprawne dane");
-            return;
-        }
-
-        Client client = userOpt.get();
-        System.out.println("Zalogowano");
-
-        if (client.isAdmin()) {
-            loggedAdminMenu(client);
-        } else {
-            loggedMenu(client);
-        }
+        clientService.loginUser(email, password).ifPresentOrElse(
+                client -> {
+                    System.out.println("Zalogowano");
+                    Runnable menuAction = client.isAdmin() ? () -> loggedAdminMenu(client) : () -> loggedMenu(client);
+                    menuAction.run();
+                },
+                () -> System.out.println("Niepoprawne dane")
+        );
     }
 
     private void loggedMenu(Client client) {
