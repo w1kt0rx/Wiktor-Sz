@@ -25,7 +25,7 @@ public class RentalService {
     }
 
     public void printAllRentals() {
-        rentalRepository.getAllRentals().forEach(System.out::println);
+        rentalRepository.getAll().forEach(System.out::println);
 
     }
 
@@ -53,7 +53,7 @@ public class RentalService {
     }
 
     public void revenueByCategory() {
-        rentalRepository.getAllRentals().stream()
+        rentalRepository.getAll().stream()
                 .collect(Collectors.groupingBy(
                         rental -> rental.getGame().getCategory(),
                         Collectors.reducing(
@@ -68,7 +68,7 @@ public class RentalService {
     }
 
     public void topClient() {
-        rentalRepository.getAllRentals().stream()
+        rentalRepository.getAll().stream()
                 .collect(Collectors.groupingBy(
                         Rental::getClient,
                         Collectors.counting()
@@ -79,7 +79,7 @@ public class RentalService {
     }
 
     public void mostPopularGames() {
-        rentalRepository.getAllRentals().stream()
+        rentalRepository.getAll().stream()
                 .collect(Collectors.groupingBy(
                         Rental::getGame,
                         Collectors.counting()

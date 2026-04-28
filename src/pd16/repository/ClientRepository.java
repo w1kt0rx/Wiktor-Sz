@@ -30,7 +30,7 @@ public class ClientRepository {
         return Optional.ofNullable(clientsMap.get(email));
     }
 
-    public List<Client> getAllClients() {
+    public List<Client> getAll() {
         return clientsMap.values().stream().toList();
     }
 }

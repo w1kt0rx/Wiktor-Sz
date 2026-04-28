@@ -31,7 +31,7 @@ public class GameRepository {
         return Optional.ofNullable(gameMap.get(id));
     }
 
-    public List<Game> getAllGames() {
+    public List<Game> getAll() {
         return gameMap.values().stream().toList();
     }
 }

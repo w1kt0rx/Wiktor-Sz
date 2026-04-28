@@ -23,7 +23,7 @@ public class RentalRepository {
         return Optional.ofNullable(rentalMap.get(id));
     }
 
-    public List<Rental> getAllRentals() {
+    public List<Rental> getAll() {
         return rentalMap.values().stream().toList();
     }
 }

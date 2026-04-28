@@ -35,7 +35,7 @@ public class ClientService {
     }
 
     public void printUsers() {
-        clientRepository.getAllClients().forEach(System.out::println);
+        clientRepository.getAll().forEach(System.out::println);
     }
 
 }

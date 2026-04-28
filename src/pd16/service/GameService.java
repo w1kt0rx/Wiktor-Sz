@@ -12,12 +12,12 @@ public class GameService {
     private final GameRepository gameRepository = new GameRepository();
 
     public void printAllGames() {
-        gameRepository.getAllGames()
+        gameRepository.getAll()
                 .forEach(System.out::println);
     }
 
     public void printAllRentableGames() {
-        gameRepository.getAllGames()
+        gameRepository.getAll()
                 .stream()
                 .filter(Game::isAvailable)
                 .forEach(System.out::println);
