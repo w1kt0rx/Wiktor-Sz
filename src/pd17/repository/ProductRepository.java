@@ -1,4 +1,7 @@
-package pd17;
+package pd17.repository;
+
+import pd17.utils.CsvParser;
+import pd17.model.Product;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -10,8 +13,12 @@ import java.util.Optional;
 public class ProductRepository {
     private final Map<Long, Product> productMap = new HashMap<>();
 
-    public ProductRepository(Path file) throws IOException {
-        CsvParser.loadProducts(file).forEach(product -> productMap.put(product.id(), product));
+    public ProductRepository(Path file) {
+        try {
+            CsvParser.loadProducts(file).forEach(product -> productMap.put(product.id(), product));
+        } catch (IOException e) {
+            System.err.println("Repository initialization failed");
+        }
     }
 
     public Optional<Product> getById(Long id) {

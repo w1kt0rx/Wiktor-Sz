@@ -1,4 +1,8 @@
-package pd17;
+package pd17.service;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import pd17.model.Product;
+import pd17.repository.ProductRepository;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -7,15 +11,13 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.util.Comparator;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ProductService {
     private final ProductRepository productRepository;
 
-    public ProductService(Path file) throws IOException {
+    public ProductService(Path file) {
         productRepository = new ProductRepository(file);
     }
 
@@ -61,10 +63,18 @@ public class ProductService {
             try {
                 Files.writeString(file, statistics.category + "," + statistics.totalIncome + "," + statistics.averagePrice + "\n", StandardOpenOption.APPEND);
             } catch (IOException e) {
+                System.err.println("Coś poszło nie tak przy zapisywaniu do pliku");
                 throw new RuntimeException(e);
             }
         });
     }
+
+    public void exportToJson(Path file) throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        String convertedProducts = objectMapper.writeValueAsString(getCategoryStatistics());
+        Files.writeString(file, convertedProducts + "\n", StandardOpenOption.APPEND);
+        }
+
 
     public record CategoryStats(
             String category,

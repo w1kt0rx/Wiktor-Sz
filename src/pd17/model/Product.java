@@ -1,4 +1,4 @@
-package pd17;
+package pd17.model;
 
 import java.math.BigDecimal;
 

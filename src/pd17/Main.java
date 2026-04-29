@@ -1,5 +1,7 @@
 package pd17;
 
+import pd17.service.ProductService;
+
 import java.io.IOException;
 import java.nio.file.Path;
 
@@ -11,5 +13,6 @@ public class Main {
         System.out.println("Top 3 produktów:");
         productService.getTop3ByIncome().forEach(System.out::println);
         productService.saveToTheFile(Path.of("src", "pd17", "summary.csv"));
+        productService.exportToJson(Path.of("src", "pd17", "summary.json"));
     }
 }

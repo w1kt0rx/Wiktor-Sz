@@ -1,4 +1,7 @@
-package pd17;
+package pd17.utils;
+
+import lombok.NoArgsConstructor;
+import pd17.model.Product;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -9,7 +12,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-public class CsvParser {
+@NoArgsConstructor
+public final class CsvParser {
     public static List<Product> loadProducts(Path file) throws IOException {
         List<String> lines = Files.readAllLines(file);
         List<Product> products = new ArrayList<>();
