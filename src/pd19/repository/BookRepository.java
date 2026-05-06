@@ -2,6 +2,8 @@ package pd19.repository;
 
 import lombok.ToString;
 import pd19.domain.Book;
+import pd19.dto.BookDto;
+import pd19.mapper.BookMapper;
 
 import java.util.HashMap;
 import java.util.List;
@@ -11,9 +13,11 @@ import java.util.Optional;
 @ToString
 public class BookRepository {
     private final Map<Long, Book> bookMap = new HashMap<>();
+    private long idCounter = 0;
 
-    public void save(Book book) {
+    public BookDto save(Book book) {
         bookMap.put(book.getId(), book);
+        return BookMapper.toDto(book);
     }
 
     public void delete(Book book) {
@@ -32,5 +36,9 @@ public class BookRepository {
 
     public List<Book> findAll() {
         return bookMap.values().stream().toList();
+    }
+
+    public long getNextId() {
+        return ++idCounter;
     }
 }

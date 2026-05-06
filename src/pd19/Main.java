@@ -1,7 +1,9 @@
 package pd19;
 
 import pd19.domain.Book;
+import pd19.domain.Loan;
 import pd19.domain.Member;
+import pd19.dto.*;
 import pd19.repository.BookRepository;
 import pd19.repository.LoanRepository;
 import pd19.repository.MemberRepository;
@@ -25,47 +27,46 @@ public class Main {
         LoanServiceImpl loanService =
                 new LoanServiceImpl(loanRepository, memberRepository, bookRepository);
 
-        Book b1 = Book.of("9788324631766", "Effective Java", "Bloch", Year.of(2018), 2);
-        Book b2 = Book.of("9780134685991", "Clean Architecture", "Martin", Year.of(2017), 1);
-        Book b3 = Book.of("9781491950357", "Designing Data-Intensive Applications", "Kleppmann", Year.of(2017), 0);
+        BookDto b1 = new BookDto("9788324631766", "Effective Java", "Bloch", Year.of(2018), 2);
+        BookDto b2 = new BookDto("9780134685991", "Clean Java", "Martin", Year.of(2017), 1);
+        BookDto b3 = new BookDto("9781491950357", "Designing Data-Intensive Applications", "Kleppmann", Year.of(2017), 0);
 
         bookService.addBook(b1);
         bookService.addBook(b2);
         bookService.addBook(b3);
+        memberService.register(new MemberDto("Jan", "jan@mail.com"));
+        memberService.register(new MemberDto("Anna", "anna@mail.com"));
 
-        Member m1 = memberService.register("Jan", "jan@mail.com");
-        Member m2 = memberService.register("Anna", "anna@mail.com");
+        System.out.println("dostepne ksiazki");
+        bookService.findAllAvailable().forEach(book -> System.out.println(book.title()));
 
-        System.out.println("\nDOSTĘPNE KSIĄŻKI");
-        bookService.findAvailable().forEach(b -> System.out.println(b.getTitle()));
+        System.out.println("search 'clean'");
+        bookService.search("clean").forEach(book -> System.out.println(book.title()));
 
-        System.out.println("\nSEARCH 'clean'");
-        bookService.search("clean").forEach(b -> System.out.println(b.getTitle()));
+        System.out.println("wypozyczenia");
+        loanService.borrow(new CreateLoanRequest(1L, 1L));
+        loanService.borrow(new CreateLoanRequest(1L, 2L));
 
-        System.out.println("\nWYPOŻYCZENIA");
-        loanService.borrow(m1.getId(), b1.getId());
-        loanService.borrow(m1.getId(), b2.getId());
+        System.out.println("wypozyczenia jana");
+        memberService.getActiveLoans(1L)
+                .forEach(loan -> System.out.println(loan.book().title()));
 
-        System.out.println("\nAKTYWNE WYPOŻYCZENIA JAN");
-        memberService.getActiveLoans(m1.getId())
-                .forEach(l -> System.out.println(l.getBook().getTitle()));
-
-        System.out.println("\nPRÓBA WYPOŻYCZENIA BRAK KOPII");
+        System.out.println("brak kopii");
         try {
-            loanService.borrow(m2.getId(), b3.getId());
+            loanService.borrow(new CreateLoanRequest(2L, 3L));
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
 
-        System.out.println("\nZWROT");
-        loanService.returnBook(1L);
+        System.out.println("zwracanie");
+        loanService.returnBook(new ReturnBookRequest(1L));
 
-        System.out.println("\nPO ZWROCIE");
-        memberService.getActiveLoans(m1.getId())
-                .forEach(l -> System.out.println(l.getBook().getTitle()));
+        System.out.println("po zwrocie");
+        memberService.getActiveLoans(1L)
+                .forEach(loan -> System.out.println(loan.book().title()));
 
-        System.out.println("\nPRZETERMINOWANE");
-        List<?> overdue = loanService.findOverdue();
+        System.out.println("po terminie");
+        List<LoanDto> overdue = loanService.findOverdue();
         System.out.println("Overdue count: " + overdue.size());
     }
 }

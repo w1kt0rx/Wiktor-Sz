@@ -10,28 +10,14 @@ import java.time.Year;
 
 @ToString
 @Getter
+@AllArgsConstructor(staticName = "of")
 public class Book {
-    private static long amountOfBooks = 0;
-    private final long id;
-    private final String isbn;
-    private final String title;
-    private final String author;
-    private final Year year;
-    @Setter
+    private long id;
+    private String isbn;
+    private String title;
+    private String author;
+    private Year year;
     private int availableCopies;
-
-    private Book(String isbn, String title, String author, Year year, int availableCopies) {
-        id = ++amountOfBooks;
-        this.isbn = isbn;
-        this.title = title;
-        this.author = author;
-        this.year = year;
-        this.availableCopies = availableCopies;
-    }
-
-    public static Book of(String isbn, String title, String author, Year year, int availableCopies) {
-        return new Book(isbn, title, author, year, availableCopies);
-    }
 
     public void borrow() {
         if (availableCopies <= 0) {

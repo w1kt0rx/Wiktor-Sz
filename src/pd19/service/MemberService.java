@@ -2,11 +2,13 @@ package pd19.service;
 
 import pd19.domain.Loan;
 import pd19.domain.Member;
+import pd19.dto.LoanDto;
+import pd19.dto.MemberDto;
 
 import java.util.List;
 
 public interface MemberService {
-    public Member register(String name, String email);
-    public Member findById(Long id);
-    public List<Loan> getActiveLoans(Long memberId);
+    public void register(MemberDto memberDto);
+    public MemberDto findById(Long id);
+    public List<LoanDto> getActiveLoans(Long memberId);
 }

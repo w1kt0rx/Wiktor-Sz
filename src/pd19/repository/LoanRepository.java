@@ -1,6 +1,8 @@
 package pd19.repository;
 
 import pd19.domain.Loan;
+import pd19.dto.LoanDto;
+import pd19.mapper.LoanMapper;
 
 import java.util.HashMap;
 import java.util.List;
@@ -9,9 +11,11 @@ import java.util.Optional;
 
 public class LoanRepository {
     private final Map<Long, Loan> loanMap = new HashMap<>();
+    private long idCounter = 0;
 
-    public void save(Loan loan) {
+    public LoanDto save(Loan loan) {
         loanMap.put(loan.getId(), loan);
+        return LoanMapper.toDto(loan);
     }
 
     public void delete(Loan loan) {
@@ -24,5 +28,9 @@ public class LoanRepository {
 
     public List<Loan> findAll() {
         return loanMap.values().stream().toList();
+    }
+
+    public long getNextId() {
+        return ++idCounter;
     }
 }

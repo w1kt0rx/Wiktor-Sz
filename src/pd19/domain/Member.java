@@ -1,7 +1,7 @@
 package pd19.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.Setter;
 import lombok.ToString;
 
 import java.util.ArrayList;
@@ -11,21 +11,20 @@ import java.util.List;
 @ToString
 @Getter
 public class Member {
-    private static long amountOfMembers = 0;
-    private final long id;
-    @Setter
+    private long id;
     public String name;
-    private final String email;
-    private final List<Loan> loans = new ArrayList<>();
+    private String email;
+    private List<Loan> loans;
 
-    private Member(String name, String email) {
-        id = ++amountOfMembers;
+    private Member(long id, String name, String email) {
+        this.id = id;
         this.name = name;
         this.email = email;
+        this.loans = new ArrayList<>();
     }
 
-    public static Member of(String name, String email) {
-        return new Member(name, email);
+    public static Member of(long id, String name, String email) {
+        return new Member(id, name, email);
     }
 
     public boolean canBorrow() {
@@ -36,7 +35,7 @@ public class Member {
         return Collections.unmodifiableList(loans);
     }
 
-    public void addLoan(Loan loan) {
+    public void borrow(Loan loan) {
         loans.add(loan);
     }
 
