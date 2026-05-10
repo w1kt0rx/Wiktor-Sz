@@ -20,23 +20,18 @@ public class ApiGateway {
 
         List<TodoDto> todos;
         try {
-            todos = jsonClient.getTodos(userId).stream()
-                    .filter(todo -> !todo.completed())
-                    .toList();
+            todos = jsonClient.getTodos(userId).stream().filter(todo -> !todo.completed()).toList();
         } catch (Exception e) {
-            System.out.println("Coś poszło nie tak");
+            System.out.println("Coś poszło nie tak podczas pobierania zadan w ApiGateway");
             System.err.println(e.getMessage());
             todos = List.of();
         }
 
         List<PostDto> posts;
         try {
-            posts = jsonClient.getPosts(userId).stream()
-                    .sorted(Comparator.comparing(PostDto::id).reversed())
-                    .limit(3)
-                    .toList();
+            posts = jsonClient.getPosts(userId).stream().sorted(Comparator.comparing(PostDto::id).reversed()).limit(3).toList();
         } catch (Exception e) {
-            System.out.println("Coś poszło nie tak");
+            System.out.println("Coś poszło nie tak podczas pobierania postów w ApiGateway");
             System.err.println(e.getMessage());
             posts = List.of();
         }
@@ -45,15 +40,10 @@ public class ApiGateway {
         try {
             weather = weatherClient.getWeather(Double.parseDouble(user.address().geo().lat()), Double.parseDouble(user.address().geo().lng()));
         } catch (Exception e) {
-            System.out.println("Coś poszło nie tak");
+            System.out.println("Coś poszło nie tak podczas pobierania pogody w apiGateWay");
             System.err.println(e.getMessage());
         }
-        return new UserReport(
-                user,
-                todos,
-                posts,
-                weather
-        );
+        return new UserReport(user, todos, posts, weather);
     }
 
 }

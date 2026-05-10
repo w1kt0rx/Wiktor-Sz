@@ -21,7 +21,9 @@ public class WeatherClient {
 
     public WeatherDto getWeather(double lat, double lon) {
         try {
-            String url = String.format("https://api.open-meteo.com/v1/forecast?latitude=%f&longitude=%f&current_weather=true", lat, lon);
+            String url = "https://api.open-meteo.com/v1/forecast?latitude=" + lat
+                    + "&longitude=" + lon
+                    + "&current=temperature_2m,wind_speed_10m";
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(url))
                     .header("Accept", "application/json")
@@ -31,14 +33,14 @@ public class WeatherClient {
 
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
             JsonNode root = objectMapper.readTree(response.body());
-            JsonNode currentWeather = root.get(0).get("current_weather");
+            JsonNode currentWeather = root.get("current");
             return new WeatherDto(
-                    currentWeather.get("temperature").asDouble(),
-                    currentWeather.get("windspeed").asDouble()
+                    currentWeather.get("temperature_2m").asDouble(),
+                    currentWeather.get("wind_speed_10m").asDouble()
             );
 
         } catch (Exception e) {
-            System.out.println("Coś poszlo nie tak");
+            System.out.println("Coś poszlo nie tak podczas pobierania pogody");
             System.err.println(e.getMessage());
             return null;
         }

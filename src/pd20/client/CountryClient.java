@@ -22,7 +22,7 @@ public class CountryClient {
 
     public Optional<CountryDto> getCountry(String name) {
         try {
-                String url = String.format("https://restcountries.com/v3.1/name/%s", name);
+            String url = String.format("https://restcountries.com/v3.1/name/%s", name);
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(url))
                     .header("Accept", "application/json")
@@ -39,7 +39,7 @@ public class CountryClient {
                     country.get("region").asText())
             );
         } catch (Exception e) {
-            System.out.println("Coś poszło nie tak");
+            System.out.println("Coś poszło nie tak podczas pobierania kraju");
             System.err.println(e.getMessage());
             return Optional.empty();
         }

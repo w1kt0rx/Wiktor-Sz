@@ -35,8 +35,8 @@ public class JsonPlaceHolderClient {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
             UserDto user = objectMapper.readValue(response.body(), UserDto.class);
             return Optional.ofNullable(user);
-        } catch (Exception e){
-            System.out.println("Coś poszło nie tak");
+        } catch (Exception e) {
+            System.out.println("Coś poszło nie tak podczas pobierania user'ów");
             System.err.println(e.getMessage());
             return Optional.empty();
         }
@@ -55,11 +55,12 @@ public class JsonPlaceHolderClient {
 
             return objectMapper.readValue(
                     response.body(),
-                    new TypeReference<>() {}
+                    new TypeReference<>() {
+                    }
             );
 
         } catch (Exception e) {
-            System.out.println("Coś poszło nie tak");
+            System.out.println("Coś poszło nie tak podczas pobierania tasków");
             System.err.println(e.getMessage());
             return List.of();
         }
@@ -78,11 +79,12 @@ public class JsonPlaceHolderClient {
 
             return objectMapper.readValue(
                     response.body(),
-                    new TypeReference<>() {}
+                    new TypeReference<>() {
+                    }
             );
 
         } catch (Exception e) {
-            System.out.println("Coś poszło nie tak");
+            System.out.println("Coś poszło nie tak podczas pobierania postów");
             System.err.println(e.getMessage());
             return List.of();
         }
