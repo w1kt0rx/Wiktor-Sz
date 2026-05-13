@@ -73,7 +73,7 @@ public class ProductService {
         ObjectMapper objectMapper = new ObjectMapper();
         String convertedProducts = objectMapper.writeValueAsString(getCategoryStatistics());
         Files.writeString(file, convertedProducts + "\n", StandardOpenOption.APPEND);
-        }
+    }
 
 
     public record CategoryStats(
